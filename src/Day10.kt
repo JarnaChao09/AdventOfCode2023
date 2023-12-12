@@ -47,8 +47,6 @@ fun connectedLocations(grid: List<List<Connections>>, location: Pair<Int, Int>):
 
 operator fun <T> Pair<T, T>.contains(thing: T): Boolean = first == thing || second == thing
 
-fun Boolean.toInt(): Int = if (this) 1 else 0
-
 fun main() {
     var startLocation: Pair<Int, Int> = 0 to 0
     val grid = readInput("input/Day10").mapIndexed { r, it ->

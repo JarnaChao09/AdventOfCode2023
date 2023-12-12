@@ -19,3 +19,13 @@ fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteA
  * The cleaner shorthand for printing output.
  */
 fun Any?.println() = println(this)
+
+/**
+ * Conversion of Boolean to Int, true = 1, false = 0
+ */
+fun Boolean.toInt(): Int = if (this) 1 else 0
+
+/**
+ * Conversion of Boolean to Long, true = 1L, false = 0L
+ */
+fun Boolean.toLong(): Long = if (this) 1L else 0L
