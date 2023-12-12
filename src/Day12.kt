@@ -29,13 +29,14 @@ fun solutions(springs: List<Char>, brokenSprings: List<Int>): Long {
             solutions(springs.drop(1), brokenSprings)
         }
         '#' -> {
-            helper(springs, brokenSprings).also {
-                cache[springs to brokenSprings] = it
+            cache.getOrPut(springs to brokenSprings) {
+                helper(springs, brokenSprings)
             }
+
         }
         '?' -> {
-            solutions(springs.drop(1), brokenSprings) + helper(springs, brokenSprings).also {
-                cache[springs to brokenSprings] = it
+            solutions(springs.drop(1), brokenSprings) + cache.getOrPut(springs to brokenSprings) {
+                helper(springs, brokenSprings)
             }
         }
         else -> error("unreachable")
@@ -43,8 +44,6 @@ fun solutions(springs: List<Char>, brokenSprings: List<Int>): Long {
 }
 
 fun helper(springs: List<Char>, brokenSprings: List<Int>): Long {
-    cache[springs to brokenSprings]?.let { return it }
-
     if (brokenSprings.isEmpty()) {
         return 0
     }
