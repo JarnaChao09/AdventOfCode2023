@@ -2,8 +2,6 @@ import kotlin.math.absoluteValue
 
 typealias Grid<T> = List<List<T>>
 
-fun <T> Grid<T>.transpose(): Grid<T> = List(this[0].size) { r -> List(this.size) { c -> this[c][r] } }
-
 fun <T> Grid<T>.toIndexed(): Grid<Triple<T, Int, Int>> = this.mapIndexed { r, e -> e.mapIndexed { c, v -> Triple(v, r, c) }}
 
 fun <T> Grid<T>.toIndexedLong(): Grid<Triple<T, Long, Long>> = this.mapIndexed { r, e -> e.mapIndexed { c, v -> Triple(v, r.toLong(), c.toLong()) }}

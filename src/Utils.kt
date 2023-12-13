@@ -29,3 +29,8 @@ fun Boolean.toInt(): Int = if (this) 1 else 0
  * Conversion of Boolean to Long, true = 1L, false = 0L
  */
 fun Boolean.toLong(): Long = if (this) 1L else 0L
+
+/**
+ * Gives the transpose of a rectangular matrix (stored as a List<List<T>>)
+ */
+fun <T> List<List<T>>.transpose(): List<List<T>> = List(this[0].size) { r -> List(this.size) { c -> this[c][r] } }
