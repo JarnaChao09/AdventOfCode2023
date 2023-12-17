@@ -34,3 +34,14 @@ fun Boolean.toLong(): Long = if (this) 1L else 0L
  * Gives the transpose of a rectangular matrix (stored as a List<List<T>>)
  */
 fun <T> List<List<T>>.transpose(): List<List<T>> = List(this[0].size) { r -> List(this.size) { c -> this[c][r] } }
+
+enum class Direction(val r: Int, val c: Int) {
+    Up(-1, 0),
+    Right(0, +1),
+    Down(+1, 0),
+    Left(0, -1);
+
+    operator fun component1(): Int = this.r
+
+    operator fun component2(): Int = this.c
+}

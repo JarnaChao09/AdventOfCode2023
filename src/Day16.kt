@@ -1,50 +1,39 @@
-enum class Direction(val r: Int, val c: Int) {
-    Up(-1, 0),
-    Right(0, +1),
-    Down(+1, 0),
-    Left(0, -1);
-
-    operator fun component1(): Int = this.r
-
-    operator fun component2(): Int = this.c
-
-    fun changeDirection(onChar: Char): Pair<Direction, Direction?> {
-        return when (onChar) {
-            '.' -> this to null
-            '/' -> {
-                when (this) {
-                    Up -> Right to null
-                    Right -> Up to null
-                    Down -> Left to null
-                    Left -> Down to null
-                }
+fun Direction.changeDirection(onChar: Char): Pair<Direction, Direction?> {
+    return when (onChar) {
+        '.' -> this to null
+        '/' -> {
+            when (this) {
+                Direction.Up -> Direction.Right to null
+                Direction.Right -> Direction.Up to null
+                Direction.Down -> Direction.Left to null
+                Direction.Left -> Direction.Down to null
             }
-            '\\' -> {
-                when (this) {
-                    Up -> Left to null
-                    Right -> Down to null
-                    Down -> Right to null
-                    Left -> Up to null
-                }
-            }
-            '-' -> {
-                when (this) {
-                    Up -> Left to Right
-                    Right -> Right to null
-                    Down -> Left to Right
-                    Left -> Left to null
-                }
-            }
-            '|' -> {
-                when (this) {
-                    Up -> Up to null
-                    Right -> Up to Down
-                    Down -> Down to null
-                    Left -> Up to Down
-                }
-            }
-            else -> error("invalid character $onChar")
         }
+        '\\' -> {
+            when (this) {
+                Direction.Up -> Direction.Left to null
+                Direction.Right -> Direction.Down to null
+                Direction.Down -> Direction.Right to null
+                Direction.Left -> Direction.Up to null
+            }
+        }
+        '-' -> {
+            when (this) {
+                Direction.Up -> Direction.Left to Direction.Right
+                Direction.Right -> Direction.Right to null
+                Direction.Down -> Direction.Left to Direction.Right
+                Direction.Left -> Direction.Left to null
+            }
+        }
+        '|' -> {
+            when (this) {
+                Direction.Up -> Direction.Up to null
+                Direction.Right -> Direction.Up to Direction.Down
+                Direction.Down -> Direction.Down to null
+                Direction.Left -> Direction.Up to Direction.Down
+            }
+        }
+        else -> error("invalid character $onChar")
     }
 }
 
