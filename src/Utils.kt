@@ -35,6 +35,9 @@ fun Boolean.toLong(): Long = if (this) 1L else 0L
  */
 fun <T> List<List<T>>.transpose(): List<List<T>> = List(this[0].size) { r -> List(this.size) { c -> this[c][r] } }
 
+/**
+ * Enum for directions in (row, column) space
+ */
 enum class Direction(val r: Int, val c: Int) {
     Up(-1, 0),
     Right(0, +1),
@@ -44,4 +47,22 @@ enum class Direction(val r: Int, val c: Int) {
     operator fun component1(): Int = this.r
 
     operator fun component2(): Int = this.c
+}
+
+/**
+ * Splits on empty collections to form a grouping of lists
+ */
+fun <T : Collection<*>> List<T>.splitOnEmpty(): List<List<T>> = buildList {
+    var tmp = mutableListOf<T>()
+    this@splitOnEmpty.forEach {
+        if (it.isNotEmpty()) {
+            tmp.add(it)
+        } else {
+            add(tmp.toList())
+            tmp = mutableListOf()
+        }
+    }
+    if (tmp.isNotEmpty()) {
+        add(tmp.toList())
+    }
 }

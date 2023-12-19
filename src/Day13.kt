@@ -1,18 +1,3 @@
-fun <T : Collection<*>> List<T>.splitOnEmpty(): List<List<T>> = buildList {
-    var tmp = mutableListOf<T>()
-    this@splitOnEmpty.forEach {
-        if (it.isNotEmpty()) {
-            tmp.add(it)
-        } else {
-            add(tmp.toList())
-            tmp = mutableListOf()
-        }
-    }
-    if (tmp.isNotEmpty()) {
-        add(tmp.toList())
-    }
-}
-
 fun <T> List<List<T>>.check(exclude: Int = -1): Int {
     val ret = this.indices.toList().dropLast(1).firstOrNull {
         if (it + 1 == exclude) return@firstOrNull false
