@@ -1,6 +1,4 @@
 fun main() {
-    fun gcd(a: Long, b: Long): Long = if (a == 0L) b else gcd(b % a, a)
-
     val funcs = mapOf(
         'L' to Pair<String, String>::first,
         'R' to Pair<String, String>::second,

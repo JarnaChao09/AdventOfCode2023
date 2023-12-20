@@ -52,15 +52,6 @@ operator fun <T> List<List<T>>.get(point: Pair<Int, Int>): T? =
         null
     }
 
-fun <T> ArrayDeque<T>.drainFirst(block: (T) -> Unit) {
-    while (this.isNotEmpty()) {
-        block(this.removeFirst())
-    }
-}
-
-fun <T> dequeOf(vararg items: T): ArrayDeque<T> = ArrayDeque(items.toList())
-fun <T> dequeOf(items: List<T>): ArrayDeque<T> = ArrayDeque(items.toList())
-
 fun run(grid: List<List<Char>>, startPoint: Pair<Int, Int>, startDirection: Direction): Set<Pair<Int, Int>> {
     val seen = mutableSetOf<Pair<Pair<Int, Int>, Direction>>()
 
@@ -74,11 +65,11 @@ fun run(grid: List<List<Char>>, startPoint: Pair<Int, Int>, startDirection: Dire
 
         val (d1, d2) = dir.changeDirection(grid[pos]!!)
         grid[pos + d1]?.let {
-            queue.addLast((pos + d1) to d1)
+            addLast((pos + d1) to d1)
         }
         d2?.let { d ->
             grid[pos + d]?.let {
-                queue.addLast((pos + d) to d)
+                addLast((pos + d) to d)
             }
         }
     }

@@ -66,3 +66,26 @@ fun <T : Collection<*>> List<T>.splitOnEmpty(): List<List<T>> = buildList {
         add(tmp.toList())
     }
 }
+
+/**
+ * Common queue drain loop, provides access to the queue through implicit receiver
+ *
+ * NOTE:
+ *  capturing the called variable in the block is also possible
+ *  might change API to construct new array deque (i.e. (T) -> ArrayDeque<T>)
+ */
+fun <T> ArrayDeque<T>.drainFirst(block: ArrayDeque<T>.(T) -> Unit) {
+    while (this.isNotEmpty()) {
+        this.block(this.removeFirst())
+    }
+}
+
+/**
+ * Smart constructor for ArrayDeque<T>
+ */
+fun <T> dequeOf(vararg items: T): ArrayDeque<T> = ArrayDeque(items.toList())
+
+/**
+ * Function to calculate the greatest common denominator of two numbers
+ */
+fun gcd(a: Long, b: Long): Long = if (a == 0L) b else gcd(b % a, a)
