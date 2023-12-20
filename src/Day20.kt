@@ -54,6 +54,7 @@ fun countRx(moduleMap: Map<String, Module>): Long {
     var i = 0L
 
     while (fixedRxParents.isNotEmpty()) {
+        // hacky EnumMap implementation
         val pulses = mutableListOf(mutableListOf<Pair<String, String>>(), mutableListOf())
         val curr = dequeOf(Triple("button", "broadcaster", Pulse.LOW))
 
